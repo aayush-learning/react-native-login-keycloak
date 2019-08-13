@@ -152,7 +152,8 @@ export class Login {
       return `${url + slash}realms/${encodeURIComponent(realm)}`;
     }
 
-    getLoginURL() {
+    getLoginURL(conf) {
+      this.setConf(conf);
       const { redirectUri, clientId, kcIdpHint,options } = this.conf;
       const responseType = 'code';
       const state = uuidv4();
