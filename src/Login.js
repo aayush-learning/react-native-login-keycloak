@@ -168,7 +168,10 @@ export class Login {
         options:options,
         state,
       })}`;
-
+      this.state = {
+          ...this.state,
+          state,
+        };
       return {
         url,
         state,
