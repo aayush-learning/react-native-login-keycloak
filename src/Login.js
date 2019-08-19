@@ -86,13 +86,14 @@ export class Login {
 
 
     async retrieveTokens(code) {
-      const { redirectUri, clientId } = this.conf;
+      const { redirectUri, clientId, credentials  } = this.conf;
+      const { secret } = credentials;
       this.props.url = `${this.getRealmURL()}/protocol/openid-connect/token`;
 
       this.setRequestOptions(
         'POST',
         querystring.stringify({
-          grant_type: 'authorization_code', redirect_uri: redirectUri, client_id: clientId, code,
+          grant_type: 'authorization_code', redirect_uri: redirectUri, client_id: clientId, code, client_secret: secret,
         }),
       );
 
