@@ -50,7 +50,8 @@ export class Login {
     }
 
     async logoutKc() {
-      const { clientId } = this.conf;
+      const { clientId, credentials } = this.conf;
+      const { secret } = credentials;
       const savedTokens = await this.getTokens();
       if (!savedTokens) {
         return undefined;
@@ -60,7 +61,7 @@ export class Login {
 
       this.setRequestOptions(
         'POST',
-        querystring.stringify({ client_id: clientId, refresh_token: savedTokens.refresh_token }),
+        querystring.stringify({ client_id: clientId, refresh_token: savedTokens.refresh_token, client_secret: secret }),
       );
 
       const fullResponse = await fetch(this.props.url, this.props.requestOptions);
